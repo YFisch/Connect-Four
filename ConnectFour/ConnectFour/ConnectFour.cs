@@ -56,6 +56,11 @@ namespace ConnectFour
 
             lstwinningsets = new()
             {
+                 new() { lblGrid37, lblGrid38, lblGrid39, lblGrid36},
+                 new() { lblGrid38, lblGrid39, lblGrid40, lblGrid37},
+                 new() { lblGrid39, lblGrid40, lblGrid41, lblGrid38},
+                 new() { lblGrid40, lblGrid41, lblGrid42, lblGrid39},
+
                  new() {lblGrid1, lblGrid2, lblGrid3, lblGrid4},
                  new() {lblGrid2, lblGrid3, lblGrid4, lblGrid5},
                  new() {lblGrid3, lblGrid4, lblGrid5, lblGrid6},
@@ -104,7 +109,7 @@ namespace ConnectFour
                  new() {lblGrid29, lblGrid23, lblGrid17, lblGrid11},
                  new() {lblGrid23, lblGrid17, lblGrid11, lblGrid5},
                  new() {lblGrid22, lblGrid16, lblGrid10, lblGrid4},
-                  new() {lblGrid36, lblGrid29, lblGrid22, lblGrid15},
+                 new() {lblGrid36, lblGrid29, lblGrid22, lblGrid15},
                  new() {lblGrid29, lblGrid22, lblGrid15,lblGrid8},
                  new() {lblGrid22, lblGrid15, lblGrid8, lblGrid1},
                  new() {lblGrid37, lblGrid30, lblGrid23, lblGrid16},
@@ -145,50 +150,22 @@ namespace ConnectFour
                 {
                     SetLabelBackcolor(lbl);
                     lstwinningsets.ForEach(l => DetectWinner(l));
-//AS Why do you need to say if gamestatus  ==gamestatusenum.playing here and below again if it wrapped in that same condition?
+                    //AS Why do you need to say if gamestatus  ==gamestatusenum.playing here and below again if it wrapped in that same condition?
                     if (gamestatus == GameStatusenum.Playing)
                     {
                         DetectTie();
-                        if (gamestatus == GameStatusenum.Playing)
+                        if (currentturn == TurnEnum.Red)
                         {
-                            if (currentturn == TurnEnum.Red)
-                            {
-                                currentturn = TurnEnum.Yellow;
-                            }
-                            else
-                            {
-                                currentturn = TurnEnum.Red;
-                            }
-//AS This seems very repetitive to keep saying if(IsComputerTurn()), try refactoring.
-                            if (IsComputerTurn())
-                            {
-                                DoComputerTurnOffenceDeffence("Color [Yellow]");
-
-                                if (IsComputerTurn())
-                                {
-                                    DoComputerTurnOffenceDeffence("Color [Red]");
-
-                                        if (IsComputerTurn())
-                                        {
-                                            DoComputerTurnSecondOffenceDeffence("Color [Red]");
-
-                                        if (IsComputerTurn())
-                                        {
-                                            DoComputerTurnSecondOffenceDeffence("Color [Yellow]");
-
-                                                if (IsComputerTurn())
-                                            {
-                                                DoComputerTurnThirdOffenceDeffence("Color [Yellow]");
-                                             
-                                                    if (IsComputerTurn())
-                                                    {
-                                                        DoComputerTurnRandom();
-                                                    }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            currentturn = TurnEnum.Yellow;
+                        }
+                        else
+                        {
+                            currentturn = TurnEnum.Red;
+                        }
+                        //AS This seems very repetitive to keep saying if(IsComputerTurn()), try refactoring.
+                        if (IsComputerTurn())
+                        {
+                            DoComputerTurn();
                         }
                     }
                 }
@@ -231,22 +208,39 @@ namespace ConnectFour
             DoTurn(lst);
         }
 
+        private void DoComputerTurn()
+        {
+            DoComputerTurnOffenceDeffence("Color [Yellow]");
+
+            DoComputerTurnOffenceDeffence("Color [Red]");
+
+            DoComputerTurnSecondOffenceDeffence("Color [Red]");
+
+            DoComputerTurnSecondOffenceDeffence("Color [Yellow]");
+
+            DoComputerTurnThirdOffenceDeffence("Color [Red]");
+
+            DoComputerTurnThirdOffenceDeffence("Color [Yellow]");
+
+            DoComputerTurnRandom();
+        }
+
         private bool IsComputerTurn()
         {
             return currentturn == TurnEnum.Yellow && gamestatus == GameStatusenum.Playing && playcomputer == true;
         }
 
-        private void DoComputerTurnOffenceDeffence(string turn)
+        private void DoComputerTurnOffenceDeffence(string turn, bool b = false)
         {
             var lst = lstwinningsets.FirstOrDefault(s => s.Count(l => l.BackColor.ToString() == turn) == 3 && s.Count(l => l.BackColor == Color.White) == 1);
             if (lst != null)
             {
                 var lbl = lst.First(l => l.BackColor == Color.White);
-                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White))
+                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White) && IsComputerTurn() == true)
                 {
                     GetButton(lbl);
                 }
-                
+
             }
         }
 
@@ -256,7 +250,7 @@ namespace ConnectFour
             if (lst != null)
             {
                 var lbl = lst.First(l => l.BackColor == Color.White);
-                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White))
+                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White) && IsComputerTurn() == true)
                 {
                     GetButton(lbl);
                 }
@@ -269,7 +263,7 @@ namespace ConnectFour
             if (lst != null)
             {
                 var lbl = lst.First(l => l.BackColor == Color.White);
-                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White))
+                if (lbl == lst.FirstOrDefault(l => l.BackColor == Color.White) && IsComputerTurn() == true)
                 {
                     GetButton(lbl);
                 }
@@ -278,8 +272,12 @@ namespace ConnectFour
 
         private void DoComputerTurnRandom()
         {
-            var btn = lstbuttons[new Random().Next(0, lstbuttons.Count())];
-            GetColumn(btn);
+            if (IsComputerTurn() == true)
+            {
+                var btn = lstbuttons[new Random().Next(0, lstbuttons.Count())];
+                GetColumn(btn);
+            }
+
 
         }
 
@@ -287,7 +285,7 @@ namespace ConnectFour
         {
             if (lstl1.Contains(lbl))
             {
-                if(lbl == lstl1.FirstOrDefault(l => l.BackColor == Color.White))
+                if (lbl == lstl1.FirstOrDefault(l => l.BackColor == Color.White))
                 {
                     GetColumn(btnEnter1);
                 }
@@ -344,7 +342,7 @@ namespace ConnectFour
             {
                 if (lbl == lstl6.FirstOrDefault(l => l.BackColor == Color.White))
                 {
-                    GetColumn(btnEnter5);
+                    GetColumn(btnEnter6);
                 }
                 else
                 {
@@ -355,7 +353,7 @@ namespace ConnectFour
             {
                 if (lbl == lstl7.FirstOrDefault(l => l.BackColor == Color.White))
                 {
-                    GetColumn(btnEnter6);
+                    GetColumn(btnEnter7);
                 }
                 else
                 {
