@@ -148,7 +148,7 @@ namespace ConnectFour
                 {
                     SetLabelBackcolor(lbl);
                     lstwinningsets.ForEach(l => DetectWinner(l));
-                    //AS Is this below still necessary? This is wrapped in the same condition above.
+                    //AS Is this below still necessary? This is wrapped in the same condition above.                   
                     if (gamestatus == GameStatusenum.Playing)
                     {
                         DetectTie();
@@ -227,7 +227,7 @@ namespace ConnectFour
             return currentturn == TurnEnum.Yellow && gamestatus == GameStatusenum.Playing && playcomputer == true;
         }
 
-        private void DoComputerTurnOffenceDeffence(string turn, bool b = false)
+        private void DoComputerTurnOffenceDeffence(string turn)
         {
             var lst = lstwinningsets.FirstOrDefault(s => s.Count(l => l.BackColor.ToString() == turn) == 3 && s.Count(l => l.BackColor == Color.White) == 1);
             if (lst != null)
@@ -272,6 +272,7 @@ namespace ConnectFour
             if (IsComputerTurn() == true)
             {
                 var btn = lstbuttons[new Random().Next(0, lstbuttons.Count())];
+
                 GetColumn(btn);
             }
 
