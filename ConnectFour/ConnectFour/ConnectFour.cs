@@ -272,7 +272,6 @@ namespace ConnectFour
             if (IsComputerTurn() == true)
             {
                 var btn = lstbuttons[new Random().Next(0, lstbuttons.Count())];
-
                 GetColumn(btn);
             }
 
