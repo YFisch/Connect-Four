@@ -1,6 +1,4 @@
-﻿//AS WOW Amazing job! You picked a really hard game to implement, very impressive! 90% Please see comments below and in the code and resubmit.
-//AS After start is clicked the player option radio buttons should be disabled.
-//AS There are some occurrences that the computer should be doing defense and it doesn't.
+﻿//AS Great job! 95% See one comment below and resubmit.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -150,7 +148,7 @@ namespace ConnectFour
                 {
                     SetLabelBackcolor(lbl);
                     lstwinningsets.ForEach(l => DetectWinner(l));
-                    //AS Why do you need to say if gamestatus  ==gamestatusenum.playing here and below again if it wrapped in that same condition?
+                    //AS Is this below still necessary? This is wrapped in the same condition above.
                     if (gamestatus == GameStatusenum.Playing)
                     {
                         DetectTie();
@@ -162,7 +160,6 @@ namespace ConnectFour
                         {
                             currentturn = TurnEnum.Red;
                         }
-                        //AS This seems very repetitive to keep saying if(IsComputerTurn()), try refactoring.
                         if (IsComputerTurn())
                         {
                             DoComputerTurn();
