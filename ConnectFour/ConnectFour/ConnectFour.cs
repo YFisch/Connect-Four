@@ -1,5 +1,4 @@
-﻿//AS Great job! 95% See one comment below and resubmit.
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -148,7 +147,6 @@ namespace ConnectFour
                 {
                     SetLabelBackcolor(lbl);
                     lstwinningsets.ForEach(l => DetectWinner(l));
-                    //AS Is this below still necessary? This is wrapped in the same condition above.                   
                     if (gamestatus == GameStatusenum.Playing)
                     {
                         DetectTie();
