@@ -7,6 +7,7 @@ namespace ConnectFourSystem
     {
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public event EventHandler? ScoreChanged;
         public enum GameStatusEnum { NotStarted, Playing, Winner, Tie }
 
         public enum TurnEnum {None, Red, Yellow }
@@ -24,8 +25,15 @@ namespace ConnectFourSystem
         List<Token> lstl6;
         List<Token> lstl7;
 
+        private static int scoreredwins;
+        private static int scoreyellowwins;
+        private static int scorereties;
+        private static int numgames;
+
         public Game()
         {
+            numgames++;
+            this.GameName = "Game " + numgames;
             for (int i = 0; i < 42; i++)
             {
                 this.Tokens.Add(new Token());
@@ -128,6 +136,7 @@ namespace ConnectFourSystem
 
         public List<Token> Tokens { get; private set; } = new();
         public List<EnterButton> EnterButtons { get; private set; } = new();
+        public string GameName { get; private set; }
         public GameStatusEnum GameStatus
         {
             get => _gamestatus;
@@ -136,6 +145,7 @@ namespace ConnectFourSystem
                 _gamestatus = value;
                 this.InvokePropertyChanged();
                 this.InvokePropertyChanged("GameStatusDescription");
+                this.InvokePropertyChanged("StartButtonText");
             }
         }
 
@@ -150,23 +160,79 @@ namespace ConnectFourSystem
             }
         }
 
-        public string GameStatusDescription { get => $"{this.GameStatus.ToString()} current turn: {this.CurrentTurn.ToString()}"; }
+        public string GameStatusDescription 
+        {
+            get
+            {
+                string s = $"{this.GameName}, {this.GameMode}: ";
+
+                switch (this.GameStatus)
+                {
+                    case GameStatusEnum.NotStarted:
+                        s = s + " Click Start";
+                        break;
+                    case GameStatusEnum.Playing:
+                        s = s + " Current Turn" + this.CurrentTurn;
+                        break;
+                    case GameStatusEnum.Winner:
+                        s = s + this.GameStatus + " is " + this.CurrentTurn;
+                        break;
+                    case GameStatusEnum.Tie:
+                        s = s + this.GameStatus;
+                        break;
+                }
+                return s;
+            }
+        }
         public TurnEnum Winner { get; private set; }
         public bool PlayAgainstComputer { get; set; }
+        public string GameMode { get => this.PlayAgainstComputer ? "Play the Computer" : "2 Player"; }
+        public string GameModeHeader { get => "For " + this.GameName; }
+        public string StartButtonText
+        {
+            get
+            {
+                string s = "";
+                if(this.GameStatus == GameStatusEnum.NotStarted)
+                {
+                    s = "Start ";
+                }
+                else
+                {
+                    s = "Stop ";
+                }
+                s = s + this.GameName;
+                return s;
+            }
+        }
         public System.Drawing.Color BackColorNotStarted { get; set; } = System.Drawing.Color.White;
         public System.Drawing.Color BackColorTie { get; set; } = System.Drawing.Color.LimeGreen;
         public System.Drawing.Color BackColorCurrentTurnRed { get; set; } = System.Drawing.Color.Red;
         public System.Drawing.Color BackColorCurrentTutnYellow { get; set; } = System.Drawing.Color.Yellow;
         public string TokenWinnerText { get; set; } = "W";
         public string TokenPlayingText { get; set; } = "";
+        public static string Score { get => $"Red wins = {scoreredwins}, Yellow wins =  {scoreyellowwins}, Ties = {scorereties}"; }
 
         public void StartGame(bool playagainstcomputer = false)
         {
             this.PlayAgainstComputer = playagainstcomputer;
-            this.Tokens.ForEach(t => { t.BackColor = this.BackColorNotStarted; t.DeclareWinnerText = TokenPlayingText; });
+            ClearTokens();
             this.EnterButtons.ForEach(t => t.BackColor = this.BackColorCurrentTurnRed);
             this.GameStatus = GameStatusEnum.Playing;
             this.CurrentTurn = TurnEnum.Red;
+        }
+
+        public void StopGame()
+        {
+            this.GameStatus = GameStatusEnum.NotStarted;
+            this.EnterButtons.ForEach(b => b.BackColor = BackColorNotStarted);
+            ClearTokens();
+        }
+
+        private void ClearTokens()
+        {
+            this.Tokens.ForEach(t => { t.BackColor = this.BackColorNotStarted; t.DeclareWinnerText = TokenPlayingText; });
+ 
         }
 
         private void TakeToken(List<Token> lst)
@@ -404,6 +470,15 @@ namespace ConnectFourSystem
                 this.Winner = this.CurrentTurn;
                 this.EnterButtons.ForEach(b => b.BackColor = BackColorNotStarted);
                 lst.ForEach(l => l.DeclareWinnerText = TokenWinnerText);
+                if(this.CurrentTurn == TurnEnum.Red)
+                {
+                    scoreredwins++;
+                }
+                else
+                {
+                    scoreyellowwins++;
+                }
+                ScoreChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -424,6 +499,8 @@ namespace ConnectFourSystem
                 this.GameStatus = GameStatusEnum.Tie;
                 this.Tokens.ForEach(t => t.BackColor = this.BackColorTie);
                 this.EnterButtons.ForEach(b => b.BackColor = BackColorTie);
+                scorereties++;
+                ScoreChanged?.Invoke(this, new EventArgs());
             }
         }
 

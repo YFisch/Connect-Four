@@ -3,24 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ConnectFourApp.ConnectFour"
              Title="ConnectFour">
-    <VerticalStackLayout>
-        <Grid Margin="5" ColumnDefinitions="*,*,*,*" RowDefinitions="*" BackgroundColor="#C8C8C8">
-            <Border Grid.Column="0" Grid.Row="0">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="Red" Offset="0"/>
-                        <GradientStop Color="Yellow" Offset=".5"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            <Button x:Name="StartBtn" Margin="10" Text="Start" Style="{StaticResource Key=start}" Clicked="StartBtn_Clicked"/>
-            </Border>
-            <RadioButton Content="2 Player" Grid.Column="1" Grid.Row="0" IsChecked="True"/>
-            <RadioButton x:Name="PlayAgainstComputerRb" Content="Play Against the Computer" Grid.Column="2" Grid.Row="0"/>
+    <Grid ColumnDefinitions="0.25*,*" RowDefinitions="Auto,Auto,Auto, Auto">
+        <Border Grid.Column="0" Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="Red" Offset="0"/>
+                    <GradientStop Color="Yellow" Offset=".5"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Button x:Name="StartBtn" Margin="10" Text="{Binding StartButtonText}" Style="{StaticResource Key=start}" Clicked="StartBtn_Clicked"/>
+        </Border>
+        <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+            <VerticalStackLayout Grid.Column="0" Grid.Row="0" >
+                <Label Text="For game " FontSize="20"/>
+                <RadioButton Content="2 Player" />
+                <RadioButton x:Name="PlayAgainstComputerRb" Content="Play Against the Computer"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="0" Grid.Row="1" >
+                <Label Text="Choose wich one to play" FontSize="20"/>
+                <RadioButton x:Name="Game1Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged" IsChecked="True"/>
+                <RadioButton x:Name="Game2Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
+                <RadioButton x:Name="Game3Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
+            </VerticalStackLayout>
+        </Grid>
+        <Grid Margin="5" ColumnDefinitions="*,*" RowDefinitions="*" BackgroundColor="#C8C8C8" Grid.Column="1" Grid.Row="0">
+            <Label Text=" 3 Simultaneous Games" FontSize="25" HorizontalOptions="Center"/>
             <Border Grid.Column="3" Grid.Row="0" Stroke="Black" Margin="5" BackgroundColor="White">
                 <Label Text="{Binding GameStatusDescription}" VerticalOptions="Center"/>
             </Border>
         </Grid>
-        <Grid ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="*" Margin="130,130,130,0">
+        <Label x:Name="ScoreLbl" HorizontalOptions="Center" FontSize="25" Grid.Column="1" Grid.Row="1"/>
+        <Grid ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="*" Margin="130,130,130,0" Grid.Column="1" Grid.Row="2">
             <Button x:Name="btnEnter1" Style="{StaticResource Key=enter}" Grid.Column="0" Grid.Row="0" Clicked="btnEnter_Clicked" BindingContext="{Binding EnterButtons[0]}" BackgroundColor="{Binding BackColorMaui}"/>
             <Button x:Name="btnEnter2" Style="{StaticResource Key=enter}" Grid.Column="1" Grid.Row="0" Clicked="btnEnter_Clicked" BindingContext="{Binding EnterButtons[1]}" BackgroundColor="{Binding BackColorMaui}"/>
             <Button x:Name="btnEnter3" Style="{StaticResource Key=enter}" Grid.Column="2" Grid.Row="0" Clicked="btnEnter_Clicked" BindingContext="{Binding EnterButtons[2]}" BackgroundColor="{Binding BackColorMaui}"/>
@@ -29,7 +42,7 @@
             <Button x:Name="btnEnter6" Style="{StaticResource Key=enter}" Grid.Column="5" Grid.Row="0" Clicked="btnEnter_Clicked" BindingContext="{Binding EnterButtons[5]}" BackgroundColor="{Binding BackColorMaui}"/>
             <Button x:Name="btnEnter7" Style="{StaticResource Key=enter}" Grid.Column="6" Grid.Row="0" Clicked="btnEnter_Clicked" BindingContext="{Binding EnterButtons[6]}" BackgroundColor="{Binding BackColorMaui}"/>
         </Grid>
-        <Grid Margin="125,0,125,0" BackgroundColor="Blue" ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="*,*,*,*,*,*,*">
+        <Grid Margin="125,0,125,0" BackgroundColor="Blue" ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="*,*,*,*,*,*,*" Grid.Column="1" Grid.Row="3">
             <Frame Grid.Column="0" Grid.Row="0" Style="{StaticResource Key=frame-token}">
                 <Label x:Name="lblGrid1" Style="{StaticResource Key=token}" BindingContext="{Binding Tokens[0]}" Text="{Binding DeclareWinnerText}" BackgroundColor="{Binding BackColorMaui}"/>
             </Frame>
@@ -157,5 +170,5 @@
                 <Label x:Name="lblGrid42" Style="{StaticResource Key=token}" BindingContext="{Binding Tokens[41]}" Text="{Binding DeclareWinnerText}" BackgroundColor="{Binding BackColorMaui}"/>
             </Frame>
         </Grid>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
