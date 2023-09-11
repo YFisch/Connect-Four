@@ -10,7 +10,7 @@ namespace ConnectFourSystem
         public event EventHandler? ScoreChanged;
         public enum GameStatusEnum { NotStarted, Playing, Winner, Tie }
 
-        public enum TurnEnum {None, Red, Yellow }
+        public enum TurnEnum { None, Red, Yellow }
 
         GameStatusEnum _gamestatus = GameStatusEnum.NotStarted;
         TurnEnum _currentturn = TurnEnum.None;
@@ -107,7 +107,7 @@ namespace ConnectFourSystem
                  new() {this.Tokens[22], this.Tokens[16], this.Tokens[10], this.Tokens[4]},
                  new() {this.Tokens[21], this.Tokens[15], this.Tokens[9], this.Tokens[3]},
                  new() {this.Tokens[35], this.Tokens[28], this.Tokens[21], this.Tokens[14]},
-                 new() {this.Tokens[28], this.Tokens[21], this.Tokens[14],this.Tokens[9]},
+                 new() {this.Tokens[28], this.Tokens[21], this.Tokens[14],this.Tokens[7]},
                  new() {this.Tokens[21], this.Tokens[14], this.Tokens[7], this.Tokens[0]},
                  new() {this.Tokens[36], this.Tokens[29], this.Tokens[22], this.Tokens[15]},
                  new() {this.Tokens[29], this.Tokens[22], this.Tokens[15], this.Tokens[8]},
@@ -126,9 +126,6 @@ namespace ConnectFourSystem
                  new() {this.Tokens[26], this.Tokens[19], this.Tokens[12], this.Tokens[5]},
                  new() {this.Tokens[41], this.Tokens[34], this.Tokens[27], this.Tokens[20]},
                  new() {this.Tokens[34], this.Tokens[27], this.Tokens[20], this.Tokens[13]},
-                 new() {this.Tokens[27], this.Tokens[20], this.Tokens[15], this.Tokens[7]},
-                 new() {this.Tokens[27], this.Tokens[20], this.Tokens[15], this.Tokens[7]},
-                 new() {this.Tokens[27], this.Tokens[20], this.Tokens[15], this.Tokens[7]},
         };
         }
 
@@ -160,7 +157,7 @@ namespace ConnectFourSystem
             }
         }
 
-        public string GameStatusDescription 
+        public string GameStatusDescription
         {
             get
             {
@@ -193,7 +190,7 @@ namespace ConnectFourSystem
             get
             {
                 string s = "";
-                if(this.GameStatus == GameStatusEnum.NotStarted)
+                if (this.GameStatus == GameStatusEnum.NotStarted)
                 {
                     s = "Start ";
                 }
@@ -232,7 +229,7 @@ namespace ConnectFourSystem
         private void ClearTokens()
         {
             this.Tokens.ForEach(t => { t.BackColor = this.BackColorNotStarted; t.DeclareWinnerText = TokenPlayingText; });
- 
+
         }
 
         private void TakeToken(List<Token> lst)
@@ -253,8 +250,8 @@ namespace ConnectFourSystem
 
                         this.EnterButtons.ForEach(b => b.BackColor = BackColorCurrentTurnRed);
                     }
-          
-                  lstwinningsets.ForEach(l => DetectWinner(l));                 
+
+                    lstwinningsets.ForEach(l => DetectWinner(l));
                     if (this.GameStatus == GameStatusEnum.Playing)
                     {
                         DetectTie();
@@ -470,7 +467,7 @@ namespace ConnectFourSystem
                 this.Winner = this.CurrentTurn;
                 this.EnterButtons.ForEach(b => b.BackColor = BackColorNotStarted);
                 lst.ForEach(l => l.DeclareWinnerText = TokenWinnerText);
-                if(this.CurrentTurn == TurnEnum.Red)
+                if (this.CurrentTurn == TurnEnum.Red)
                 {
                     scoreredwins++;
                 }

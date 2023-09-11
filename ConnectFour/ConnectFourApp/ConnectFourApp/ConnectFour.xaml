@@ -20,7 +20,7 @@
                 <RadioButton x:Name="PlayAgainstComputerRb" Content="Play Against the Computer"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="0" Grid.Row="1" >
-                <Label Text="Choose wich one to play" FontSize="20"/>
+                <Label Text="Choose which one to play" FontSize="20"/>
                 <RadioButton x:Name="Game1Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged" IsChecked="True"/>
                 <RadioButton x:Name="Game2Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
                 <RadioButton x:Name="Game3Rb" Content="{Binding GameStatusDescription}" CheckedChanged="Game_CheckedChanged"/>
