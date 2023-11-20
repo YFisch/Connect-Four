@@ -1,0 +1,86 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    padding-bottom: 50%;
+    display: inline-block;
+    font: italic;
+    color: dodgerblue;
+    text-shadow: inherit;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    line-height:100px;
+}
+
+.tie {
+    background: linear-gradient(white, black);
+}
+
+.red {
+    background: linear-gradient(white, red);
+}
+
+.yellow {
+    background: linear-gradient(white, yellow);
+}
+
+.btngradient {
+    display:inline-block;
+    font-size:30px;
+    background: linear-gradient(red, orange, yellow);
+    border:solid;
+    border-color:black;
+}
+
+.play {
+    width: 100%;
+    height: 20%;
+    justify-content:center;
+    line-height:65%;
+    margin:50% 0px 50% 0px;
+}
+
+.start {
+    width: 70%;
+    height: 80%;
+}
+
+.textgradient {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    background: linear-gradient(60deg, red, yellow, red, yellow, red);
+    font: 900 3em sans-serif;
+    background-clip: border-box;
+    border: solid;
+    border-color: black;
+}
+
+@media (max-width:1200px) 
+{
+    .form {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-evenly; 
+    }
+}
+
+    

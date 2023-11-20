@@ -1,0 +1,334 @@
+﻿@page
+@model ConnectFourWeb.Pages.PlayConnectFourModel
+@{
+}
+<div class="row">
+    <div class="col-4">
+        <button class="btn btngradient start" id="btnStartStop" onclick="startGame()">Start</button>
+    </div>
+    <div class="col-4">
+        <div class="bg-light text-center fs-5 border border-3 border-primary">Connect Four</div>
+    </div>
+    <div class="col-4">
+        <div class="border border-3 border-secondary h-75 w-75" id="msg">
+        </div>
+    </div>
+    <div class="row m-2 form">
+        <div class="col m-3"><button id="btn1" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn2" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn3" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn4" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn5" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn6" class="btn btn-light p-3 enter">Enter</button></div>
+        <div class="col m-3"><button id="btn7" class="btn btn-light p-3 enter">Enter</button></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="bg-primary container-fluid m-3">
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d1 r1 c1"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e2 d2 r1 r2 c4"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e3 d3 r1 r2 r3 c7"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e4 d4 d5 r1 r2 r3 r4 c10"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e5 d6 r2 r3 r4 c13"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e6 d7 r3 r4 c16"></span>
+                    </td>                                           
+                    <td>                                            
+                        <span class="circle bg-white rounded-circle e7 d8 r4 c19"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d9 r5 c1 c2"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e2 d1 d10 r5 r6 c4 c5"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e3 d2 d5 d11 r5 r6 r7 c7 c8"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e4 d3 d6 d12 d13 r5 r6 r7 r8 c10 c11"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e5 d4 d7 d14 r6 r7 r8 c13 c14"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e6 d8 d15 r7 r8 c16 c17"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e7 d16 r8 c19 c20"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d17 r9 c1 c2 c3"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e2 d5 d9 d18 r9 r10 c4 c5 c6"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e3 d1 d6 d10 d12 d19 r9 r10 r11 c7 c8 c9"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e4 d2 d7 d11 d14 d20 d21 r9 r10 r11 r12 c10 c11 c12"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e5 d3 d8 d13 d15 d22 r10 r11 r12 c13 c14 c15"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e6 d4 d16 d23 r11 r12 c16 c17 c18"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e7 d24 r12 c19 c20 c21"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d5 r13 c1 c2 c3"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e2 d6 d12 d17 r13 r14 c4 c5 c6"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e3 d7 d9 d14 d18 d20 r13 r14 r15 c7 c8 c9"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e4 d1 d8 d10 d15 d19 d22 r13 r14 r15 r16 c10 c11 c12"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e5 d2 d11 d16 d21 d23 r14 r15 r16 c13 c14 c15"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e6 d3 d13 d24 r15 r16 c16 c17 c18"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e7 d4 r16 c19 c20 c21"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d12 r17 c2 c3"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e2 d14 d20 r17 r18 c5 c6"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e3 d15 d17 d22 r17 r18 r19 c8 c9"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e4 d9 d16 d18 d23 r17 r18 r19 r20 c11 c12"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e5 d10 d19 d24 r18 r19 r20 c1 c154"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e6 d11 d21 r19 r20 c17 c18"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e7 d13 r20 c20 c21"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="circle bg-white rounded-circle e1 d20 r21 c3"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e2 d22 r21 r22 c6"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e3 d23 r21 r22 r23 c9"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e4 d17 d24 r21 r22 r23 r24 c12"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e5 d18 r22 r23 r24 c15"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e6 d19 r23 r24 c18"></span>
+                    </td>
+                    <td>
+                        <span class="circle bg-white rounded-circle e7 d21 r24 c21"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    const red = "red";
+    const yellow = "yellow";
+    let currentTurn = red;
+    let gameOver = true;
+    const msg = document.querySelector("#msg");
+    const allCircles = [...document.querySelectorAll(".circle")];
+    const allEnterButtons = [...document.querySelectorAll(".enter")];
+    let winningSets = [];
+    let lstTokens1 = [];
+    let lstTokens2 = [];
+    let lstTokens3 = [];
+    let lstTokens4 = [];
+    let lstTokens5 = [];
+    let lstTokens6 = [];
+    let lstTokens7 = [];
+
+    setupWinningSets();
+    allEnterButtons.forEach(b => b.addEventListener("click", getColumn));
+
+    function setupWinningSets() {
+        for (let i = 1; i < 25; i++) {
+            winningSets.push([...document.querySelectorAll(`.d${i}`)]);
+            winningSets.push([...document.querySelectorAll(`.r${i}`)]);
+            if (i < 22) {
+                winningSets.push([...document.querySelectorAll(`.c${i}`)]);
+            }
+        }
+    }
+
+    function setupEnterButtonSets() {
+        lstTokens1 = [];
+        lstTokens2 = [];
+        lstTokens3 = [];
+        lstTokens4 = [];
+        lstTokens5 = [];
+        lstTokens6 = [];
+        lstTokens7 = [];
+        lstTokens1.push([...document.querySelectorAll(".e1.bg-white")]);
+        lstTokens2.push([...document.querySelectorAll(".e2.bg-white")]);
+        lstTokens3.push([...document.querySelectorAll(".e3.bg-white")]);
+        lstTokens4.push([...document.querySelectorAll(".e4.bg-white")]);
+        lstTokens5.push([...document.querySelectorAll(".e5.bg-white")]);
+        lstTokens6.push([...document.querySelectorAll(".e6.bg-white")]);
+        lstTokens7.push([...document.querySelectorAll(".e7.bg-white")]);
+        const lstOfTokens = [lstTokens1, lstTokens2, lstTokens3, lstTokens4, lstTokens5, lstTokens6, lstTokens7];
+        lstOfTokens.forEach(t => t.map(row => row.reverse()).reverse());
+    }
+
+    function startGame() {
+        gameOver = false;
+        currentTurn = "red";
+        ShowMessage();
+        allCircles.forEach(c => {
+            c.classList.add("bg-white");
+            c.classList.remove("red");
+            c.classList.remove("yellow");
+            c.classList.remove("tie");
+            c.textContent = "";
+        })
+        allEnterButtons.forEach(e => {
+            e.classList.remove("yellow");
+            e.classList.add("red");
+        });
+    }
+
+    function takeSpot(lst) {
+        if (gameOver == false) {
+            const token = lst[0][0];
+            if (currentTurn == red) {
+                token.classList.remove("bg-white");
+                token.classList.add("red")
+                allEnterButtons.forEach(e => {
+                    e.classList.remove("red");
+                    e.classList.add("yellow");
+                });
+            }
+            else {
+                token.classList.remove("bg-white");
+                token.classList.add("yellow");
+                allEnterButtons.forEach(e => {
+                    e.classList.remove("yellow");
+                    e.classList.add("red");
+                });
+            }
+            winningSets.forEach(l => DetectWinner(l));
+            if (gameOver == false) {
+                detectTie();
+            }
+            if (gameOver == false) {
+                currentTurn = currentTurn == red ? yellow : red;
+            }
+            ShowMessage();
+        }
+    }
+
+
+
+    function getColumn(event) {
+        const btn = event.target;
+        let lst;
+        setupEnterButtonSets();
+        if (btn.id == "btn1") {
+            lst = lstTokens1;
+        }
+        if (btn.id == "btn2") {
+            lst = lstTokens2;
+        }
+        if (btn.id == "btn3") {
+            lst = lstTokens3;
+        }
+        if (btn.id == "btn4") {
+            lst = lstTokens4;
+        }
+        if (btn.id == "btn5") {
+            lst = lstTokens5;
+        }
+        if (btn.id == "btn6") {
+            lst = lstTokens6;
+        }
+        if (btn.id == "btn7") {
+            lst = lstTokens7;
+        }
+        takeSpot(lst);
+    }
+
+    function DetectWinner(lst) {
+        if (lst.every(l => l.classList.contains(currentTurn))) {
+            gameOver = true;
+            allEnterButtons.forEach(e => {
+                e.classList.remove("red");
+                e.classList.remove("yellow");
+            });
+            lst.every(l => l.textContent = "W");
+        }
+    }
+
+    function detectTie() {
+        if (allCircles.every(e => !e.classList.contains("bg-white"))) {
+            gameOver = true;
+            allEnterButtons.forEach(e => {
+                e.classList.remove("red");
+                e.classList.remove("yellow");
+                e.classList.add("tie");
+            });
+            allCircles.forEach(c => {
+                c.classList.remove("red");
+                c.classList.remove("yellow");
+                c.classList.add("tie");
+            });
+        }
+    }
+
+    function ShowMessage() {
+        if (gameOver == false) {
+            msg.textContent = "Current turn is " + currentTurn;
+        }
+        else if (allCircles.every(e => !e.classList.contains("bg-white"))) {
+            msg.textContent = "Tie!!!!!";
+        }
+        else {
+            msg.textContent = "Winner is " + currentTurn;
+        }
+    }
+</script>

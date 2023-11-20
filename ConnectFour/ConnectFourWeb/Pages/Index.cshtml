@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-center textgradient">Connect Four</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p class="m-3 text-center text-primary">
+            Two players are presented with a 7x6 grid of empty spots. the players choose a color and then take turns dropping colored tokens into the grid. The pieces fall straight down, occupying the lowest available space within the column. The objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own tokens. If all spots are filled and neither player has a winning set, then the game results in a tie.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h4 class="m-4">Game Process and Rules:</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <ul>
+            <li>The game starts when the player clicks Start. Until then all clicks on the spot buttons are ignored, and the game status message is “Click Start to begin Game.”</li>
+            <li>After Start is clicked: The mode with the message “Current Turn: Red” is displayed. Red takes turn by clicking on the button that represents the column the player wants to drop his token, and the first available space in that column displays a red token. Then, the current turn changes to “Yellow,” which is reflected in the game status message and when the player clicks. If a player clicks on a button in which the column is full, the click is ignored, with no effect to the grid or current turn.</li>
+            <li>When there is a winner: a W displays on all winning tokens to indicate a win. Game status displays “Winner is: ” followed by the winning letter</li>
+            <li>If   the grid is full but there is no winner (tie): The back color of all Tokens changes   to a color that indicates no winner. Game status displays  “Tie.</li>
+            <li>In the game state of Win or Tie all button clicks should be ignored. Do not disable the buttons because that will cause them to look faded out.</li>
+            <li>If the user clicks Start in middle of a game, then the game should interrupt and begin a new game.</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <img src="/images/Connect-Four-WireFrame.png" alt="Connect Four Image" class="img-fluid" />
+    </div>
+    <div class="col-4">
+        <a class=" btn btngradient play" asp-page="/PlayConnectFour">Play</a>
+    </div>
+</div>
