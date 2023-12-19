@@ -3,8 +3,8 @@ const yellow = "yellow";
 let currentTurn = red;
 let gameOver = true;
 let msg;
-let allCircles;
-let allEnterButtons;
+let allCircles = [];
+let allEnterButtons = [];
 let winningSets = [];
 let lstTokens1 = [];
 let lstTokens2 = [];
@@ -18,7 +18,6 @@ $(document).ready(function () {
     allCircles = [...document.querySelectorAll(".circle")];
     allEnterButtons = [...document.querySelectorAll(".enter")];
     allEnterButtons.forEach(b => b.addEventListener("click", getColumn));
-    //$(allEnterButtons).click(getColumn);
     setupWinningSets();
 });
 function setupWinningSets() {
@@ -58,24 +57,26 @@ function startGame() {
 function takeSpot(lst) {
     if (gameOver == false) {
         const token = lst[0][0];
-        if (currentTurn == red) {
-            $(token).removeClass("bg-white");
-            $(token).addClass("red");
-            $(allEnterButtons).removeClass("red").addClass("yellow");
+        if (token != null) {
+            if (currentTurn == red) {
+                $(token).removeClass("bg-white");
+                $(token).addClass("red");
+                $(allEnterButtons).removeClass("red").addClass("yellow");
+            }
+            else {
+                $(token).removeClass("bg-white");
+                $(token).addClass("yellow");
+                $(allEnterButtons).removeClass("yellow").addClass("red");
+            }
+            winningSets.forEach(l => DetectWinner(l));
+            if (gameOver == false) {
+                detectTie();
+            }
+            if (gameOver == false) {
+                currentTurn = currentTurn == red ? yellow : red;
+            }
+            ShowMessage();
         }
-        else {
-            $(token).removeClass("bg-white");
-            $(token).addClass("yellow");
-            $(allEnterButtons).removeClass("yellow").addClass("red");
-        }
-        winningSets.forEach(l => DetectWinner(l));
-        if (gameOver == false) {
-            detectTie();
-        }
-        if (gameOver == false) {
-            currentTurn = currentTurn == red ? yellow : red;
-        }
-        ShowMessage();
     }
 }
 function getColumn(event) {

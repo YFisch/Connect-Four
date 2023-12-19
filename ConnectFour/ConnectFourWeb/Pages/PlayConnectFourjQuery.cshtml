@@ -232,24 +232,26 @@
         function takeSpot(lst) {
             if (gameOver == false) {
                 const token = lst[0][0];
-                if (currentTurn == red) {
-                    $(token).removeClass("bg-white");
-                    $(token).addClass("red")
-                    $(allEnterButtons).removeClass("red").addClass("yellow");
+                if (token != null) {
+                    if (currentTurn == red) {
+                        $(token).removeClass("bg-white");
+                        $(token).addClass("red")
+                        $(allEnterButtons).removeClass("red").addClass("yellow");
+                    }
+                    else {
+                        $(token).removeClass("bg-white");
+                        $(token).addClass("yellow")
+                        $(allEnterButtons).removeClass("yellow").addClass("red");
+                    }
+                    winningSets.forEach(l => DetectWinner(l));
+                    if (gameOver == false) {
+                        detectTie();
+                    }
+                    if (gameOver == false) {
+                        currentTurn = currentTurn == red ? yellow : red;
+                    }
+                    ShowMessage();
                 }
-                else {
-                    $(token).removeClass("bg-white");
-                    $(token).addClass("yellow")
-                    $(allEnterButtons).removeClass("yellow").addClass("red");
-                }
-                winningSets.forEach(l => DetectWinner(l));
-                if (gameOver == false) {
-                    detectTie();
-                }
-                if (gameOver == false) {
-                    currentTurn = currentTurn == red ? yellow : red;
-                }
-                ShowMessage();
             }
         }
 

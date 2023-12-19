@@ -19,7 +19,6 @@ $(document).ready(function () {
     allCircles = [...document.querySelectorAll(".circle")];
     allEnterButtons = [...document.querySelectorAll(".enter")];
     allEnterButtons.forEach(b => b.addEventListener("click", getColumn))
-    //$(allEnterButtons).click(getColumn);
     setupWinningSets();
 });
 
@@ -63,24 +62,26 @@ function startGame() {
 function takeSpot(lst: Element[][]) {
     if (gameOver == false) {
         const token = lst[0][0];
-        if (currentTurn == red) {
-            $(token).removeClass("bg-white");
-            $(token).addClass("red")
-            $(allEnterButtons).removeClass("red").addClass("yellow");
+        if (token != null) {
+            if (currentTurn == red) {
+                $(token).removeClass("bg-white");
+                $(token).addClass("red")
+                $(allEnterButtons).removeClass("red").addClass("yellow");
+            }
+            else {
+                $(token).removeClass("bg-white");
+                $(token).addClass("yellow")
+                $(allEnterButtons).removeClass("yellow").addClass("red");
+            }
+            winningSets.forEach(l => DetectWinner(l));
+            if (gameOver == false) {
+                detectTie();
+            }
+            if (gameOver == false) {
+                currentTurn = currentTurn == red ? yellow : red;
+            }
+            ShowMessage();
         }
-        else {
-            $(token).removeClass("bg-white");
-            $(token).addClass("yellow")
-            $(allEnterButtons).removeClass("yellow").addClass("red");
-        }
-        winningSets.forEach(l => DetectWinner(l));
-        if (gameOver == false) {
-            detectTie();
-        }
-        if (gameOver == false) {
-            currentTurn = currentTurn == red ? yellow : red;
-        }
-        ShowMessage();
     }
 }
 
