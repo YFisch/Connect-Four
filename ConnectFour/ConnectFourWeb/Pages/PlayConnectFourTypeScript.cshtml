@@ -1,0 +1,172 @@
+﻿@page
+@model ConnectFourWeb.Pages.PlayConnectFourTypeScriptModel
+@{
+}
+<div class="row">
+    <div class="col-4">
+        <button class="btn btngradient start" id="btnStartStop" onclick="startGame()">Start</button>
+    </div>
+    <div class="col-4">
+        <div class="bg-light text-center fs-5 border border-3 border-primary">Connect Four</div>
+    </div>
+    <div class="col-4">
+        <div class="border border-3 border-secondary h-75 w-75" id="msg"> </div>
+    </div>
+</div>
+<div class="row m-2 form">
+    <div class="col m-3"><button id="btn1" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn2" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn3" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn4" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn5" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn6" class="btn btn-light p-3 enter">Enter</button></div>
+    <div class="col m-3"><button id="btn7" class="btn btn-light p-3 enter">Enter</button></div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="bg-primary container-fluid m-3">
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d1 r1 c1"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d2 r1 r2 c4"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d3 r1 r2 r3 c7"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d4 d5 r1 r2 r3 r4 c10"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d6 r2 r3 r4 c13"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d7 r3 r4 c16"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d8 r4 c19"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d9 r5 c1 c2"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d1 d10 r5 r6 c4 c5"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d2 d5 d11 r5 r6 r7 c7 c8"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d3 d6 d12 d13 r5 r6 r7 r8 c10 c11"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d4 d7 d14 r6 r7 r8 c13 c14"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d8 d15 r7 r8 c16 c17"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d16 r8 c19 c20"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d17 r9 c1 c2 c3"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d5 d9 d18 r9 r10 c4 c5 c6"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d1 d6 d10 d12 d19 r9 r10 r11 c7 c8 c9"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d2 d7 d11 d14 d20 d21 r9 r10 r11 r12 c10 c11 c12"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d3 d8 d13 d15 d22 r10 r11 r12 c13 c14 c15"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d4 d16 d23 r11 r12 c16 c17 c18"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d24 r12 c19 c20 c21"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d5 r13 c1 c2 c3"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d6 d12 d17 r13 r14 c4 c5 c6"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d7 d9 d14 d18 d20 r13 r14 r15 c7 c8 c9"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d1 d8 d10 d15 d19 d22 r13 r14 r15 r16 c10 c11 c12"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d2 d11 d16 d21 d23 r14 r15 r16 c13 c14 c15"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d3 d13 d24 r15 r16 c16 c17 c18"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d4 r16 c19 c20 c21"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d12 r17 c2 c3"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d14 d20 r17 r18 c5 c6"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d15 d17 d22 r17 r18 r19 c8 c9"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d9 d16 d18 d23 r17 r18 r19 r20 c11 c12"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d10 d19 d24 r18 r19 r20 c1 c154"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d11 d21 r19 r20 c17 c18"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d13 r20 c20 c21"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="circle bg-white rounded-circle e1 d20 r21 c3"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e2 d22 r21 r22 c6"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e3 d23 r21 r22 r23 c9"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e4 d17 d24 r21 r22 r23 r24 c12"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e5 d18 r22 r23 r24 c15"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e6 d19 r23 r24 c18"></span>
+                </td>
+                <td>
+                    <span class="circle bg-white rounded-circle e7 d21 r24 c21"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/js/PlayConnectFourTypeScript.js"></script>
+}
